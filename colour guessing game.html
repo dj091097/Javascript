@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COLOR GAME</title>
+	<link rel="stylesheet" type="text/css" href="colorGame.css">
+</head>
+<body>
+	<h1>THE GREAT COLOUR GAME
+	<br>
+	<span id="colorDisplay">RGB</span>
+	<br>
+	 MADE BY DJ</h1>
+	<div id="stripe">
+		<button id="reset">New Colors</button>
+		<span id="message"> </span>
+		<button id="easy" class="mode">Easy</button>
+		<button id="hard" class="mode selected">Hard</button>
+	</div>
+	<div id="container">
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+	</div>
+
+
+<script type="text/javascript" src="colorGame.js"></script>
+</body>
+</html>
+
+
+<!--COOKBOOK BY DJ :)
+
+1. creating 6 div panels and placing them into another div having id = container.
+2. linking the stylesheet colorGame.css with this file.
+3. gave a background color to body and saw how divisions are made by using the code
+.square{
+	width: 30%;
+	padding-bottom: 30%;
+	background:purple;
+	float: left;
+}
+4. defining style for id=container as
+#container{
+	max-width: 600px;  -> to resize them
+	margin: 0 auto;		-> to centre them 
+}
+5. connect colorGame.js to the file.
+6.  In the colorGame.js, delare an array of 6 rgb colors.
+var colors=[
+"rgb(255, 0, 0)",
+"rgb(255, 255, 0)",
+"rgb(0, 255, 0)",
+"rgb(0, 255, 255)",
+"rgb(0, 0, 255)",
+"rgb(255, 0, 255)"
+];
+7. assign squares the random colors using 
+for (i=0;i<squares.length;i++){
+	squares[i].style.background = colors[i];
+}
+8.use a span with an id to separate out RGB in the heading to randomize it later.
+9. write a demo code for checking if the clicked color matches with picked color:
+for (i=0;i<squares.length;i++){
+	squares[i].style.background = colors[i];
+	squares[i].addEventListener("click",function(){
+		var clickedColor = this.style.background;
+		if(clickedColor===pickedColor){
+			alert("correct");
+		}
+		else{
+			this.style.background = "#232323"; ->to make them look as if they got invisible on clicking
+		}
+	});
+}
+10. trying to display a message rather than alert(since its very annoying!).
+var messageDisplay= document.querySelector("#message");
+messageDisplay.textContent="correct!";
+11. declare a function to change the color of each squares color to the pickedcolor.
+function changeColor(color){
+	//loop through squares
+	// change the color of all with given color
+	for (i=0;i<color.length;i++){
+		color[i].style.background = pickedColor;
+	}
+}
+12. declare a function to pick random colors for new game using math.random()(to choose a random number bt 0 and 6) and math.floor()(chopping off decimal)
+pickedColor= pickcolor();
+function pickColor(){
+	return colors[Math.floor(Math.random()*colors.length)];
+}
+13. we are finished with the basic game here. now we will randomise the colors array to add different combination of colors rather than just 6 basic colors.
+function generateColors(val){
+	//make an array
+	var arr=[];
+	//add random colors 
+	//given below is a spagetti code for generating a string in the form of rgb(r, g, b)
+	/*for(i=0;i<val;i++){
+		arr[i]= "rgb(" + Math.floor(Math.random()*255+1) + ", " + Math.floor(Math.random()*255+1) + ", " + Math.floor(Math.random()*255+1)+ ")";
+	}*/
+	//more organised way of doing this is
+	for (i=0;i<val;i++){
+		arr[i] = randomColor();
+	}
+	//return the array
+	return arr;
+
+}
+
+function randomColor(){
+	var r = Math.floor(Math.random()*256);
+	var g = Math.floor(Math.random()*256);
+	var b = Math.floor(Math.random()*256);
+	return "rgb("+ r + ", " + g + ", " + b + ")"; // spaced after commas are very important. 
+
+}
+var colors = generateColors(6);
+14. change bachground color of h1 to pickedColor when player wins
+15. add play again functionality by declaring a button in html in the division with Id stripe.
+16 decorating stripe and aligning the button in the center.
+17 selecting and adding eventlistener to button as given:
+var resetButton = document.querySelector("#reset");
+resetButton.addEventListener("click", function(){
+	colors = generateColors(6);
+	pickedColor=pickColor();
+	h1.style.background = "#232323";
+	startGame();
+	colorDisplay.textContent=pickedColor;
+	messageDisplay.textContent="";
+	resetButton.textContent="New Colors";
+
+});
+18. making two difficulty levels easy and hard.(see the code now)
+19. now decorate it using CSS and check the transition effect while going through css file.
+20. a whole new modified code is written in the last in colorGame.js
+ -->
